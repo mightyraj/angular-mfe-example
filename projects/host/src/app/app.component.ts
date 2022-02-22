@@ -1,6 +1,5 @@
 import { loadRemoteEntry, loadRemoteModule } from '@angular-architects/module-federation';
 import { AfterViewInit, Component, ComponentFactoryResolver, Injector, ViewChild, ViewContainerRef } from '@angular/core';
-import { TestService } from 'services/test.service';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +16,8 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('footer', { read: ViewContainerRef }) footer!: ViewContainerRef;
   constructor(
     private injector: Injector,
-    private resolver: ComponentFactoryResolver,
-    private testServ: TestService
+    private resolver: ComponentFactoryResolver
   ) {
-    this.testServ.value = 'host app';
-    console.log(this.testServ.value);
    }
   ngAfterViewInit(): void {
     loadRemoteModule({
