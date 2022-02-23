@@ -1,5 +1,7 @@
 import { loadRemoteEntry, loadRemoteModule } from '@angular-architects/module-federation';
 import { AfterViewInit, Component, ComponentFactoryResolver, Injector, ViewChild, ViewContainerRef } from '@angular/core';
+import { SharedService } from 'sh-lib';
+
 
 @Component({
   selector: 'app-root',
@@ -16,8 +18,11 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('footer', { read: ViewContainerRef }) footer!: ViewContainerRef;
   constructor(
     private injector: Injector,
-    private resolver: ComponentFactoryResolver
+    private resolver: ComponentFactoryResolver,
+    private shared: SharedService
   ) {
+    this.shared.setVal('testing');
+    this.shared.setStoredValue('storerdx');
    }
   ngAfterViewInit(): void {
     loadRemoteModule({
@@ -55,23 +60,5 @@ export class AppComponent implements AfterViewInit {
       console.log(err);
     });
 
-    // loadRemoteEntry('http://localhost:5000/mfe1remoteEntry.js', 'mfe').then(e => {
-    //   debugger;
-    //   console.log(e)
-    // }).catch(err => {
-    //   debugger;
-    //   console.log(err);
-    // })
-
-    // loadRemoteModule({
-    //   type: 'module',
-    //   remoteEntry: 'http://localhost:5000/mfe1remoteEntry.js',
-    //   // remoteName: 'mfe',
-    //   exposedModule: './MfehomeComponet'
-    // }).then(comp => {
-    //   console.log('>>>>>>>')
-    // }).catch(er => {
-    //   console.log('>>>')
-    // })
   }
 }
