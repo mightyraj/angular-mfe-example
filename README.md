@@ -1,3 +1,11 @@
+# Go to the angular folde in terminal
+
+root path: cd angular-mfe-example
+angular-mfe-example> 
+
+Then only do this steps.
+
+
 # setup angular app.
 install node js & npm
 

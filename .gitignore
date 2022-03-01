@@ -17,8 +17,8 @@ bin-release/
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.
 
-/node_modules
-/.angular
+angular-mfe-example/node_modules
+angular-mfe-example/.angular
 
 
 # IDE - VSCode
