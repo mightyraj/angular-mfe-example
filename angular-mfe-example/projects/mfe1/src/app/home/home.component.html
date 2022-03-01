@@ -1,6 +1,7 @@
 <h3>home component loaded in MFE1 works! --> Child</h3>
 
-<button mat-button (click)="callApiMethod()">call api</button>
+<button mat-raised-button color="primary" (click)="callApiMethod()">call api</button>
+
 <div *ngIf="respStr !=''">
   <mat-card>
     Respose Value: {{ respStr }}

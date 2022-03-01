@@ -45,3 +45,10 @@ ng add @angular-architects/module-federation --project mfe1 --port 5000
 
 ng add @angular-architects/module-federation --project mfe1 --port 5001
 
+
+
+# now run the api
+
+change the root path to TestAPI
+
+TestApi> dotnet run
