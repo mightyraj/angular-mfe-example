@@ -11,6 +11,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using TestApi.GraphqlCore;
+using TestApi.Infrastructure.DBContext;
+using TestApi.Infrastructure.Repositories;
+using GraphiQl;
+using GraphQL;
+using GraphQL.SystemTextJson;
+using GraphQL.Types;
+using Microsoft.EntityFrameworkCore;
 
 namespace TestApi
 {
@@ -27,6 +35,18 @@ namespace TestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddScoped<ITechEventRepository, TechEventRepository>();
+            services.AddDbContext<TechEventDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TestDBconn")));
+
+            ////////////////GRAPHQL/////////////////////////
+            services.AddScoped<TechEventInfoType>();
+            services.AddScoped<ParticipantType>();
+            services.AddScoped<TechEventQuery>();
+            services.AddScoped<ISchema, TechEventSchema>();
+            services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
+            services.AddSingleton<IDocumentWriter, DocumentWriter>();
+            ////////////////GRAPHQL/////////////////////////
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

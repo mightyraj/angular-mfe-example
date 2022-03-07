@@ -8,6 +8,10 @@ import { SharedService } from 'sh-lib';
 })
 export class HomeComponent implements OnInit {
   respStr = '';
+  respObj : any;
+  on=false;
+  off=false;
+  na = false;
   constructor(private shServ: SharedService) { }
 
   ngOnInit(): void {
@@ -20,5 +24,15 @@ export class HomeComponent implements OnInit {
       console.log(err)
     })
   }
+
+  callGraphQlApi() {
+    this.shServ.apiConnectPost('graphql/', { query :"query{event(eventId:1){eventName speaker }}" }).subscribe(res => {
+      this.respObj = res;
+    }, err => {
+      console.log(err)
+    })
+  }
+
+ 
 
 }

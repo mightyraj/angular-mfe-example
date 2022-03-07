@@ -26,12 +26,17 @@ export class SharedService {
     return this.userName
   }
 
-  apiConnect(url: string, params: any) {
+  apiConnect(url: string, par: any) {
     return this.httpClient.get('https://localhost:5001/' + url, {
       headers: this.getHeaders(),
-      responseType: 'text'
+      responseType: 'text',
+      params: par
     });
   } // https://localhost:5001/WeatherForecast/data
+
+  apiConnectPost(url: string, par: any) {
+    return this.httpClient.post('https://localhost:5001/' + url, par, { headers: this.getHeaders() });
+  } 
 
   getHeaders() {
     const headers = new HttpHeaders({

@@ -4,6 +4,10 @@ using System.Linq;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
+using GraphQL;
+using GraphQL.Types;
+using GraphQL.SystemTextJson;
 
 
 namespace TestApi.Controllers
@@ -38,8 +42,8 @@ namespace TestApi.Controllers
             .ToArray();
         }
 
-         [HttpGet]
-         [Route("Category")]
+        [HttpGet]
+        [Route("Category")]
         public IEnumerable<WeatherForecast> GetOne()
         {
             var rng = new Random();
@@ -54,8 +58,28 @@ namespace TestApi.Controllers
 
         [HttpGet]
         [Route("data")]
-        public IActionResult getData() {
+        public IActionResult getData()
+        {
+            var t = Test();
             return Ok("Welcome to our new web api");
         }
+
+        public static async Task Test()
+        {
+            var schema = Schema.For(@"
+                type Query {
+                    hello: String
+                }
+                ");
+
+            var json = await schema.ExecuteAsync(_ =>
+            {
+                _.Query = "{ hello }";
+                _.Root = new { Hello = "Hello World!" };
+            });
+
+            Console.WriteLine(json);
+        }
+
     }
 }

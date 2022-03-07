@@ -1,9 +1,21 @@
 <h3>home component loaded in MFE1 works! --> Child</h3>
 
-<button mat-raised-button color="primary" (click)="callApiMethod()">call api</button>
+<button style="margin-right:5px" mat-raised-button color="primary" (click)="callApiMethod()">call api</button>
+
+<button style="margin-right:5px" mat-raised-button color="primary" (click)="callGraphQlApi()">call graph api</button>
 
 <div *ngIf="respStr !=''">
   <mat-card>
     Respose Value: {{ respStr }}
   </mat-card>
+</div>
+<mat-card>
+  Response objece : {{ respObj | json }}
+</mat-card>
+
+
+<div >
+  <a style="margin-right:5px" (click)=" on = !on;"><span [ngClass]="on  ? 'enabled' : 'disabled'">on</span></a> 
+  <a style="margin-right:5px" (click)=" off = !off;"><span [ngClass]="off  ? 'enabled' : 'disabled'">off</span></a>
+  <a style="margin-right:5px" (click)=" na = !na;"><span [ngClass]="na  ? 'enabled' : 'disabled'">na</span></a>
 </div>
