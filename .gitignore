@@ -19,6 +19,7 @@ bin-release/
 
 angular-mfe-example/node_modules
 angular-mfe-example/.angular
+angular-mfe-example/dist
 
 
 # IDE - VSCode
