@@ -1,4 +1,6 @@
-<h3>home component loaded in MFE1 works! --> Child</h3>
+<div style="border: solid 2px grey">
+
+<h3><b>MFE1 - HOME COMPONENT CHILD</b></h3>
 
 <button style="margin-right:5px" mat-raised-button color="primary" (click)="callApiMethod()">call api</button>
 
@@ -9,8 +11,13 @@
     Respose Value: {{ respStr }}
   </mat-card>
 </div>
-<mat-card>
-  Response objece : {{ respObj | json }}
+<mat-card style="margin: 5px">
+  Response object : {{ respObj | json }}
+</mat-card>
+
+<mat-card style="margin: 5px">
+  <button style="margin-right:5px" mat-raised-button color="primary" (click)="setLC()">Set the LC value</button>
+  <button style="margin-right:5px" mat-raised-button color="primary" (click)="clearLC()">Clear the LC value</button>
 </mat-card>
 
 
@@ -18,4 +25,7 @@
   <a style="margin-right:5px" (click)=" on = !on;"><span [ngClass]="on  ? 'enabled' : 'disabled'">on</span></a> 
   <a style="margin-right:5px" (click)=" off = !off;"><span [ngClass]="off  ? 'enabled' : 'disabled'">off</span></a>
   <a style="margin-right:5px" (click)=" na = !na;"><span [ngClass]="na  ? 'enabled' : 'disabled'">na</span></a>
+</div>
+
+
 </div>

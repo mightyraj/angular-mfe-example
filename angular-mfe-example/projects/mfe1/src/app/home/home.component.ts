@@ -33,6 +33,12 @@ export class HomeComponent implements OnInit {
     })
   }
 
- 
+  setLC(){
+    this.shServ.setLocalStorageValue('authcode', 'admin');
+  }
+
+  clearLC() {
+    this.shServ.clearLocalStorageValue();
+  }
 
 }

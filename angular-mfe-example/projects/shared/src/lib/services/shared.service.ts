@@ -26,6 +26,31 @@ export class SharedService {
     return this.userName
   }
 
+  async setLocalStorageValue(par: string, value: string) {
+    const ls = localStorage.getItem('userData');
+    if (ls && ls != '') {
+      const data = JSON.parse(ls);
+      data[par] = value;
+      await localStorage.setItem('userData', JSON.stringify(data));
+    } else {
+      var data = '{"'+ par + '":"'+value +'"}';
+      await localStorage.setItem("userData", data);
+    }
+  }
+
+  getLocalStorageValue() {
+    const ls = localStorage.getItem('userData');
+    if (ls && ls != '') {
+      return JSON.parse(ls);
+    } else {
+      return ls;
+    }
+  }
+
+  clearLocalStorageValue() {
+    localStorage.removeItem('userData');
+  }
+
   apiConnect(url: string, par: any) {
     return this.httpClient.get('https://localhost:5001/' + url, {
       headers: this.getHeaders(),
@@ -36,7 +61,7 @@ export class SharedService {
 
   apiConnectPost(url: string, par: any) {
     return this.httpClient.post('https://localhost:5001/' + url, par, { headers: this.getHeaders() });
-  } 
+  }
 
   getHeaders() {
     const headers = new HttpHeaders({

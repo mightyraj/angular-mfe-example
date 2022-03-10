@@ -2,6 +2,7 @@ import { loadRemoteModule } from '@angular-architects/module-federation';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { environment } from '../environments/environment';
+import { AuthGuard } from './auth.guard';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [{
@@ -18,6 +19,7 @@ const routes: Routes = [{
 // }
 {
   path: 'mfe1',
+  canActivate: [AuthGuard],
   loadChildren: () => loadRemoteModule({
     type: 'module',
     remoteEntry: environment.mfe.mfe1Url,
