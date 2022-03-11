@@ -5,28 +5,40 @@ import { environment } from '../environments/environment';
 import { AuthGuard } from './auth.guard';
 import { HomeComponent } from './home/home.component';
 
-const routes: Routes = [{
-  path: '',
-  component: HomeComponent,
-  pathMatch: 'full'
-},
-// {
-//   path: 'mfe1',
-//   loadChildren: () =>
-//     import('mfe1/MfefeatureModule').then((m) => {
-//       return m.MfefeatureModule;
-//     }),
-// }
+const routes: Routes = [
+//   {
+//   path: 'home',
+//   component: HomeComponent,
+//   pathMatch: 'full'
+// },
 {
-  path: 'mfe1',
-  canActivate: [AuthGuard],
+  path: 'login',
   loadChildren: () => loadRemoteModule({
     type: 'module',
     remoteEntry: environment.mfe.mfe1Url,
-    // remoteName: 'mfe1',
-    exposedModule: './MfefeatureModule'
-  }).then(m => m.MfefeatureModule)
+    exposedModule: './LoginModule'
+  }).then(m => m.LoginModule),
 },
+{
+  path: 'base',
+  canActivate: [AuthGuard],
+  loadChildren: () => import("./base/base.module").then((m) => m.BaseModule),
+},
+// {
+//   path: 'mfe1',
+//   canActivate: [AuthGuard],
+//   loadChildren: () => loadRemoteModule({
+//     type: 'module',
+//     remoteEntry: environment.mfe.mfe1Url,
+//     // remoteName: 'mfe1',
+//     exposedModule: './MfefeatureModule'
+//   }).then(m => m.MfefeatureModule)
+// },
+{
+  path: '',
+  redirectTo: 'login',
+  pathMatch:'full'
+}
 ];
 
 @NgModule({

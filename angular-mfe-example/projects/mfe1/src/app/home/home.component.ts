@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   on=false;
   off=false;
   na = false;
+
   constructor(private shServ: SharedService) { }
 
   ngOnInit(): void {
@@ -39,6 +40,10 @@ export class HomeComponent implements OnInit {
 
   clearLC() {
     this.shServ.clearLocalStorageValue();
+  }
+
+  public logout(): void {
+    // todo
   }
 
 }

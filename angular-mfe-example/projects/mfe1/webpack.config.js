@@ -34,7 +34,8 @@ module.exports = {
         exposes: {
             './MfefeatureModule': './projects/mfe1/src/app/mfefeature/mfefeature.module.ts',
             './MfehomeComponet': './projects/mfe1/src/app/home/home.component.ts',
-            './MfeheaderComponent': './projects/mfe1/src/app/header/header.component.ts'
+            './MfeheaderComponent': './projects/mfe1/src/app/header/header.component.ts',
+            './LoginModule': './projects/mfe1/src/app/login/login.module.ts',
         },       
         
         // For hosts (please adjust)

@@ -26,40 +26,40 @@ export class AppComponent implements AfterViewInit {
     this.shared.setStoredValue('storerdx');
    }
   ngAfterViewInit(): void {
-    loadRemoteModule({
-      type: 'module',
-      remoteEntry: environment.mfe.mfe1Url,
-      exposedModule: './MfehomeComponet',
-    }).then(comp => {
-      const factory = this.resolver.resolveComponentFactory(comp.HomeComponent);
-      this.container.createComponent(factory, undefined, this.injector);
-    }).catch(err => {
-      console.log(err);
-    });
+    // loadRemoteModule({
+    //   type: 'module',
+    //   remoteEntry: environment.mfe.mfe1Url,
+    //   exposedModule: './MfehomeComponet',
+    // }).then(comp => {
+    //   const factory = this.resolver.resolveComponentFactory(comp.HomeComponent);
+    //   this.container.createComponent(factory, undefined, this.injector);
+    // }).catch(err => {
+    //   console.log(err);
+    // });
 
-    // Header sections
-    loadRemoteModule({
-      type: 'module',
-      remoteEntry: environment.mfe.mfe1Url,
-      exposedModule: './MfeheaderComponent',
-    }).then(comp => {
-      const factory = this.resolver.resolveComponentFactory(comp.HeaderComponent);
-      this.header.createComponent(factory, undefined, this.injector);
-    }).catch(err => {
-      console.log(err);
-    });
+    // // Header sections
+    // loadRemoteModule({
+    //   type: 'module',
+    //   remoteEntry: environment.mfe.mfe1Url,
+    //   exposedModule: './MfeheaderComponent',
+    // }).then(comp => {
+    //   const factory = this.resolver.resolveComponentFactory(comp.HeaderComponent);
+    //   this.header.createComponent(factory, undefined, this.injector);
+    // }).catch(err => {
+    //   console.log(err);
+    // });
 
-    //footer section
-    loadRemoteModule({
-      type: 'module',
-      remoteEntry: environment.mfe.mfe2Url,
-      exposedModule: './MfefooterComponent',
-    }).then(comp => {
-      const factory = this.resolver.resolveComponentFactory(comp.FooterComponent);
-      this.footer.createComponent(factory, undefined, this.injector);
-    }).catch(err => {
-      console.log(err);
-    });
+    // //footer section
+    // loadRemoteModule({
+    //   type: 'module',
+    //   remoteEntry: environment.mfe.mfe2Url,
+    //   exposedModule: './MfefooterComponent',
+    // }).then(comp => {
+    //   const factory = this.resolver.resolveComponentFactory(comp.FooterComponent);
+    //   this.footer.createComponent(factory, undefined, this.injector);
+    // }).catch(err => {
+    //   console.log(err);
+    // });
 
   }
 }

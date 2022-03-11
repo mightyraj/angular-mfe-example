@@ -1,31 +1,74 @@
-<div style="border: solid 2px grey">
+<!-- <div style="border: solid 2px grey">
 
-<h3><b>MFE1 - HOME COMPONENT CHILD</b></h3>
+  <h3><b>MFE1 - HOME COMPONENT CHILD</b></h3>
 
-<button style="margin-right:5px" mat-raised-button color="primary" (click)="callApiMethod()">call api</button>
+  <button style="margin-right:5px" mat-raised-button color="primary" (click)="callApiMethod()">call api</button>
 
-<button style="margin-right:5px" mat-raised-button color="primary" (click)="callGraphQlApi()">call graph api</button>
+  <button style="margin-right:5px" mat-raised-button color="primary" (click)="callGraphQlApi()">call graph api</button>
 
-<div *ngIf="respStr !=''">
-  <mat-card>
-    Respose Value: {{ respStr }}
+  <div *ngIf="respStr !=''">
+    <mat-card>
+      Respose Value: {{ respStr }}
+    </mat-card>
+  </div>
+  <mat-card style="margin: 5px">
+    Response object : {{ respObj | json }}
   </mat-card>
-</div>
-<mat-card style="margin: 5px">
-  Response object : {{ respObj | json }}
-</mat-card>
 
-<mat-card style="margin: 5px">
-  <button style="margin-right:5px" mat-raised-button color="primary" (click)="setLC()">Set the LC value</button>
-  <button style="margin-right:5px" mat-raised-button color="primary" (click)="clearLC()">Clear the LC value</button>
-</mat-card>
+  <mat-card style="margin: 5px">
+    <button style="margin-right:5px" mat-raised-button color="primary" (click)="setLC()">Set the LC value</button>
+    <button style="margin-right:5px" mat-raised-button color="primary" (click)="clearLC()">Clear the LC value</button>
+  </mat-card>
 
 
-<div >
-  <a style="margin-right:5px" (click)=" on = !on;"><span [ngClass]="on  ? 'enabled' : 'disabled'">on</span></a> 
-  <a style="margin-right:5px" (click)=" off = !off;"><span [ngClass]="off  ? 'enabled' : 'disabled'">off</span></a>
-  <a style="margin-right:5px" (click)=" na = !na;"><span [ngClass]="na  ? 'enabled' : 'disabled'">na</span></a>
-</div>
+  <div>
+    <a style="margin-right:5px" (click)=" on = !on;"><span [ngClass]="on  ? 'enabled' : 'disabled'">on</span></a>
+    <a style="margin-right:5px" (click)=" off = !off;"><span [ngClass]="off  ? 'enabled' : 'disabled'">off</span></a>
+    <a style="margin-right:5px" (click)=" na = !na;"><span [ngClass]="na  ? 'enabled' : 'disabled'">na</span></a>
+  </div>
 
 
-</div>
+</div> -->
+
+home component
+<!-- <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+  <span>
+    <button mat-button routerLink="/">{{title}}</button>
+    <button mat-button routerLink="/"><mat-icon>home</mat-icon></button>
+  </span>
+  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+    <button mat-button routerLink="/login" *ngIf="!isAuthenticated">
+      <mat-icon>power_settings_new</mat-icon>
+      Login
+    </button>
+    <button mat-button *ngIf="isAuthenticated" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      Logout
+    </button>
+    <button mat-button routerLink="/game">
+      <mat-icon>gamepad</mat-icon>
+      Play
+    </button>
+  </div>
+  <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-menu x-position="before" #menu="matMenu">
+  <button mat-menu-item routerLink="/">
+    <mat-icon>home</mat-icon>
+    Home
+  </button>
+  <button mat-menu-item routerLink="/game">
+    <mat-icon>gamepad</mat-icon>
+    Play
+  </button>
+  <button mat-menu-item routerLink="/login" *ngIf="!isAuthenticated">
+    <mat-icon>power_settings_new</mat-icon>
+    Login
+  </button>
+  <button mat-menu-item *ngIf="isAuthenticated" (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+    Logout
+  </button>
+</mat-menu> -->
