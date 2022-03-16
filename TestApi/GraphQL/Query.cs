@@ -3,7 +3,7 @@ using HotChocolate;
 using HotChocolate.Data;
 using TestApi.Data;
 using TestApi.Models;
-using TestApi.GraphQL.Users;
+using System;
 
 namespace TestApi.GraphQL
 {
@@ -18,16 +18,11 @@ namespace TestApi.GraphQL
 
 
         [UseDbContext(typeof(AppDbContext))]
-        public IQueryable<User> GetUsers([ScopedService] AppDbContext context, int? id)
+        public IQueryable<User> GetUsers([ScopedService] AppDbContext context, string name, string password)
         {
-            if (id == 0 || id == null)
-            {
-                return context.Users;
-            }
-            else
-            {
-                return context.Users.Where(x => x.Id == id);
-            }
+            Console.WriteLine(name, password);
+            
+            return context.Users.Where(x => x.Name == name && x.Password == password);
         }
     }
 

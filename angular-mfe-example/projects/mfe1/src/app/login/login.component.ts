@@ -18,15 +18,17 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-
-    this.sh.apiConnectPost('WeatherForecast/login', {query: "query{users(id:1) {id,name,password}}"} ).subscribe(res => {
-      console.log(res)
-      this.sh.setLocalStorageValue('authcode', 'token');
-      this.sh.getLocalStorageValue();
-      this.router.navigate(['base']);
-    }, err => {
-      console.log(err)
-    })
+    this.sh.apiConnectPost('', { query: 'query{users(name: "' + this.username + '", password: "' + this.password + '") {id, name, password }}' }).subscribe({
+      next: (res: any) => {
+        if (res.data.users.length > 0) {
+          this.sh.setLocalStorageValue('authcode', res.data.users[0].name);
+          this.sh.getLocalStorageValue();
+          this.router.navigate(['base']);
+        }
+      }, error: (err) => {
+        console.log(err)
+      }
+    });
 
   }
 
