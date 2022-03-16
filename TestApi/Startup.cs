@@ -4,27 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using TestApi.GraphqlCore;
-using TestApi.Infrastructure.DBContext;
-using TestApi.Infrastructure.Repositories;
-using GraphiQl;
-using GraphQL;
-using GraphQL.SystemTextJson;
-using GraphQL.Types;
+using TestApi.Data;
 using Microsoft.EntityFrameworkCore;
+using TestApi.GraphQL;
 
 namespace TestApi
 {
     public class Startup
     {
-        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -35,60 +26,39 @@ namespace TestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // services.AppDbContext<AppDbContext>(
+            //     options => options.UseSqlServer(Configuration.GetConnectionString("TestDBconn"))
+            // );
+            // services.AppPooledDbContext<AddDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TestDBconn")));.AddMutationType<Mutation>()
+            // services.AddDbContext<AppDbContext>(
+            //     options => options.UseSqlServer(Configuration.GetConnectionString("TestDBconn"))
+            // );
 
-            services.AddScoped<ITechEventRepository, TechEventRepository>();
-            services.AddDbContext<TechEventDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TestDBconn")));
-
-            ////////////////GRAPHQL/////////////////////////
-            services.AddScoped<TechEventInfoType>();
-            services.AddScoped<ParticipantType>();
-            services.AddScoped<TechEventQuery>();
-            services.AddScoped<ISchema, TechEventSchema>();
-            services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
-            services.AddSingleton<IDocumentWriter, DocumentWriter>();
-            ////////////////GRAPHQL/////////////////////////
-
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestApi", Version = "v1" });
-            });
-            
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-                        builder.WithOrigins("http://localhost:4201", "http://localhost:4200")
-                                            .AllowAnyHeader()
-                                            .AllowAnyMethod();
-                    });
-            });
+            services.AddDbContextFactory<AppDbContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("TestDBconn")),
+                ServiceLifetime.Scoped
+            );
+            services.AddCors().AddGraphQLServer().AddQueryType<Query>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestApi v1"));
             }
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
-            app.UseCors();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapGraphQL();
+                }
+            );
         }
     }
 }

@@ -17,10 +17,17 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(){
-    this.sh.setLocalStorageValue('authcode', 'token');
-    this.sh.getLocalStorageValue();
-    this.router.navigate(['base']);
+  onSubmit() {
+
+    this.sh.apiConnectPost('WeatherForecast/login', {query: "query{users(id:1) {id,name,password}}"} ).subscribe(res => {
+      console.log(res)
+      this.sh.setLocalStorageValue('authcode', 'token');
+      this.sh.getLocalStorageValue();
+      this.router.navigate(['base']);
+    }, err => {
+      console.log(err)
+    })
+
   }
 
 }

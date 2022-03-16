@@ -60,7 +60,7 @@ export class SharedService {
   } // https://localhost:5001/WeatherForecast/data
 
   apiConnectPost(url: string, par: any) {
-    return this.httpClient.post('https://localhost:5001/' + url, par, { headers: this.getHeaders() });
+    return this.httpClient.post('https://localhost:5001/graphql/', par, { headers: this.getHeaders() });
   }
 
   getHeaders() {
