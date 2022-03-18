@@ -15,6 +15,13 @@ const routes: Routes = [{
       exposedModule: './DashboardModule'
     }).then(m => m.DashboardModule),
   },{
+    path: 'user',
+    loadChildren: () => loadRemoteModule({
+      type: 'module',
+      remoteEntry: environment.mfe.mfe2Url,
+      exposedModule: './UserModule'
+    }).then(m => m.UserModule),
+  },{
     path:'**',
     redirectTo: 'dashboard',
     pathMatch: 'full'

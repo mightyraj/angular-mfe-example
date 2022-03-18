@@ -33,7 +33,8 @@ module.exports = {
         filename: "mfe2remoteEntry.js",
         exposes: {
           './MfefooterComponent': './projects/mfe2/src/app/footer/footer.component.ts',
-          './DashboardModule': './projects/mfe2/src/app/dashboard/dashboard.module.ts'
+          './DashboardModule': './projects/mfe2/src/app/dashboard/dashboard.module.ts',
+          './UserModule': './projects/mfe2/src/app/user/user.module.ts'
         },        
         
         // For hosts (please adjust)

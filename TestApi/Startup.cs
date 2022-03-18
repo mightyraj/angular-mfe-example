@@ -38,7 +38,7 @@ namespace TestApi
                 options => options.UseSqlServer(Configuration.GetConnectionString("TestDBconn")),
                 ServiceLifetime.Scoped
             );
-            services.AddCors().AddGraphQLServer().AddQueryType<Query>();
+            services.AddCors().AddGraphQLServer().AddQueryType<Query>().AddMutationType<Mutation>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

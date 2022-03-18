@@ -15,15 +15,26 @@ namespace TestApi.GraphQL
         //     return context.Users;
         // }
 
-
-
         [UseDbContext(typeof(AppDbContext))]
-        public IQueryable<User> GetUsers([ScopedService] AppDbContext context, string name, string password)
+        public IQueryable<User> GetUsers(
+            [ScopedService] AppDbContext context,
+            string type,
+            int? id,
+            string? name,
+            string? password
+        )
         {
-            Console.WriteLine(name, password);
-            
-            return context.Users.Where(x => x.Name == name && x.Password == password);
+            switch (type)
+            {
+                case "id":
+                    return context.Users.Where(x => x.Id == id);
+                case "chk": 
+                    return context.Users.Where(x => x.Name == name && x.Password == password);
+                case "all":
+                    return context.Users;
+                default:
+                    return context.Users;
+            }
         }
     }
-
 }
