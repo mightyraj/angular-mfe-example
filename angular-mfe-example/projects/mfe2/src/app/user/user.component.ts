@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SharedService } from 'sh-lib';
 
@@ -13,6 +14,7 @@ export class UserComponent implements OnInit {
   displayedColumns: string[] = ['edit', 'delete', 'id', 'name', 'password'];
   dataSource: any;
   @ViewChild(MatPaginator) paginator: any;
+  @ViewChild(MatSort) sort: any;
 
   id = 0;
   username = "";
@@ -41,6 +43,7 @@ export class UserComponent implements OnInit {
         } else {
           this.dataSource = new MatTableDataSource(res.data.users);
           this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
         }
       },
       error: (err) => {
